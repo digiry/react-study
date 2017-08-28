@@ -23,6 +23,20 @@ class App extends Component {
     todoItems: defaultTodos
   }
 
+  constructor(prop) {
+    super(prop);
+    const todos = localStorage.getItem('todos');
+    if (todos) {
+      this.state = {
+        todoItems: JSON.parse(todos)
+      };
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    localStorage.setItem('todos', JSON.stringify(this.state.todoItems));
+  }
+  
   handleInsert = (name) => {
     this.setState({
       todoItems: [...this.state.todoItems, createItem(name)]
