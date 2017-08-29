@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import shortId from 'shortid';
 import TodoInsert from './components/TodoInsert';
 import TodoItemList from './components/TodoItemList';
+import TodoReset from './components/TodoReset';
 
 function createItem(name) {
   return {
@@ -91,6 +92,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>TODO LIST</h1>
+        <TodoReset onReset={handleReset} />
         <TodoInsert onInsert={handleInsert} />
         <TodoItemList 
           items={todoItems}
