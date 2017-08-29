@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './TodoReset.css';
 
 class TodoReset extends Component {
     static propTypes = {
@@ -18,7 +19,7 @@ class TodoReset extends Component {
         const { handleReset } = this;
         
         return (
-            <div>
+            <div className="TodoReset">
                 <button onClick={handleReset}>
                     초기화
                 </button>

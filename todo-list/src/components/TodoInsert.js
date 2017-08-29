@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './TodoInsert.css';
 
 class TodoInsert extends Component {
     static propTypes = {
@@ -40,7 +41,7 @@ class TodoInsert extends Component {
         } = this;
 
         return (
-            <div>
+            <div className="TodoInsert">
                 <input
                     value={input}
                     onChange={handleChange}

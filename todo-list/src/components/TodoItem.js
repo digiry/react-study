@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './TodoItem.css';
 
 class TodoItem extends Component {
     static propTypes = {
@@ -18,6 +19,11 @@ class TodoItem extends Component {
         onRemove: () => console.warn('onRemove not defined')
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextProps.finished !== this.props.finished;
+    }
+    
+
     render() {
         const { 
             id,
@@ -32,11 +38,13 @@ class TodoItem extends Component {
             textDecoration: finished ? 'line-through' : 'none'
         };
 
+        console.log('rendering', name);
         return (
             <li
                 style={style}
                 onClick={() => onToggle(id)}
-                onDoubleClick={() => onRemove(id)} >
+                onDoubleClick={() => onRemove(id)}
+                className="TodoItem" >
                 {name}
             </li>
         );

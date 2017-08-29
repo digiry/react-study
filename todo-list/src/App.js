@@ -3,6 +3,7 @@ import shortId from 'shortid';
 import TodoInsert from './components/TodoInsert';
 import TodoItemList from './components/TodoItemList';
 import TodoReset from './components/TodoReset';
+import './App.css';
 
 function createItem(name) {
   return {

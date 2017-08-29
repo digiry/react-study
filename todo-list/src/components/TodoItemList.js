@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './TodoItem';
+import './TodoItemList.css';
 
 const TodoItemList = ({ items, onToggle, onRemove }) => {
     const itemList = items.map(
@@ -17,7 +18,7 @@ const TodoItemList = ({ items, onToggle, onRemove }) => {
     )
 
     return (
-        <ul>
+        <ul className="TodoItemList">
             {itemList}
         </ul>
     );

@@ -1,0 +1,27 @@
+.TodoReset {
+    width: 100%;
+}
+
+.TodoReset button {
+    width: 100%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+    height: 2rem;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+    color: #868e96;
+    background: white;
+    transition: all .3s;
+}
+
+.TodoReset button:hover {
+    border: 1px solid #f03e3e;
+    color: #f03e3e;
+}
+
+.TodoReset button:active {
+    border: 1px solid #c92a2a;
+    color: #c92a2a;
+}
