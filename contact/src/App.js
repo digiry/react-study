@@ -5,30 +5,31 @@ import ViewSelector from './components/ViewSelector';
 import FloatingButton from './components/FloatingButton';
 import ContactModal from './components/ContactModal';
 import Dimmed from './components/Dimmed';
+import shortid from 'shortid';
 
 import oc from 'open-color';
 
 function generateRandomColor() {
-    const colors = [
-        'gray',
-        'red',
-        'pink',
-        'grape',
-        'violet',
-        'indigo',
-        'blue',
-        'cyan',
-        'teal',
-        'green',
-        'lime',
-        'yellow',
-        'orange'
-    ];
+  const colors = [
+    'gray',
+    'red',
+    'pink',
+    'grape',
+    'violet',
+    'indigo',
+    'blue',
+    'cyan',
+    'teal',
+    'green',
+    'lime',
+    'yellow',
+    'orange'
+  ];
 
-    // 0 부터 12까지 랜덤 숫자
-    const random = Math.floor(Math.random() * 13);
+  // 0 부터 12까지 랜덤 숫자
+  const random = Math.floor(Math.random() * 13);
 
-    return oc[colors[random]][6];
+  return oc[colors[random]][6];
 }
 
 class App extends Component {
@@ -37,7 +38,8 @@ class App extends Component {
     modal: {
       visible: false,
       mode: null
-    }
+    },
+    contacts: []
   }
 
   handleSelectView = (view) => this.setState({view})
@@ -60,9 +62,34 @@ class App extends Component {
         }
       })
     },
-    change: null,
+    change: ({name, value}) => {
+      this.setState({
+        modal: {
+          ...this.state.modal,
+          [name]: value
+        }
+      })
+    },
     action: {
-      create: null,
+      create: () => {
+        const id = shortid.generate();
+
+        const { contacts, modal: { name, phone, color } } = this.state;
+
+        const contact = {
+          id,
+          name,
+          phone,
+          color,
+          favorite: false
+        };
+
+        this.setState({
+          contacts: [...contacts, contact]
+        });
+
+        this.modalHandler.hide();
+      },
       modify: null,
       remove: null
     }
@@ -86,29 +113,34 @@ class App extends Component {
   render() {
     // 레퍼런스 준비
     const { 
-        handleSelectView,
-        handleFloatingButtonClick,
-        modalHandler
+      handleSelectView,
+      handleFloatingButtonClick,
+      modalHandler
     } = this;
 
     const { 
-        view,
-        modal
+      view,
+      modal
     } = this.state;
 
     return (
-        <div>
-            <Header/>
-            <ViewSelector onSelect={handleSelectView} selected={view}/>
-            
-            {/* view 값에 따라 다른 컨테이너를 보여준다 */}
-            <Container visible={view==='favorite'}>즐겨찾기</Container>
-            <Container visible={view==='list'}>리스트</Container>
-            
-            <ContactModal {...modal} onHide={modalHandler.hide}/>
-            <Dimmed visible={modal.visible}/>
-            <FloatingButton onClick={handleFloatingButtonClick}/>
-        </div>
+      <div>
+        <Header/>
+        <ViewSelector onSelect={handleSelectView} selected={view}/>
+        
+        {/* view 값에 따라 다른 컨테이너를 보여준다 */}
+        <Container visible={view==='favorite'}>즐겨찾기</Container>
+        <Container visible={view==='list'}>리스트</Container>
+        
+        <ContactModal 
+          {...modal}
+          onHide={modalHandler.hide}
+          onChange={modalHandler.change}
+          onAction={modalHandler.action[modal.mode]}
+        />
+        <Dimmed visible={modal.visible}/>
+        <FloatingButton onClick={handleFloatingButtonClick}/>
+      </div>
     );
   }
 }
