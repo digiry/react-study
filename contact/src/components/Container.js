@@ -21,7 +21,7 @@ const Container = ({visible, children}) => visible ? (
 ) : null;
 
 Container.propTypes = {
-  visible: PropTypes .bool
+  visible: PropTypes.bool
 };
 
 export default Container;

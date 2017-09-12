@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import onClieckOutside from 'react-onclickoutside';
+import onClickOutside from 'react-onclickoutside';
 import PropTypes from 'prop-types';
 import {media, transitions} from '../lib/style-utils';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
@@ -98,4 +98,4 @@ class Modal extends Component {
   }
 }
 
-export default onClieckOutside(Modal);
+export default onClickOutside(Modal);

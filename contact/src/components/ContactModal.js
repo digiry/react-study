@@ -5,7 +5,7 @@ import Modal from './Modal';
 import PropTypes from 'prop-types';
 import Thumbnail from './Thumbnail';
 import Input from './Input';
-
+import RemoveIcon from 'react-icons/lib/md/remove-circle';
 
 const ThumbnailWrapper = styled.div`
   /* 레이아웃 */
@@ -32,22 +32,24 @@ const Form = styled.div`
 `;
 
 const Button = styled.div`
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  flex: 1;
-  display: inline-block;
-
-  cursor: pointer;
-  text-align: center;
-  font-weight: 500;
-  font-size: 1.2rem;
-  translation: all .3s;
+    /* 레이아웃 */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    flex: 1;
+    display: inline-block;
+    
+    /* 기타 */
+    cursor: pointer;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.2rem;
+    transition: all .3s;
 
   color: white;
   background: ${props => oc[props.color][7]};
 
   &:hover {
-    background: ${props => oc[props.color][6]}
+        background: ${props => oc[props.color][6]};
   }
 
   &:active {
@@ -55,9 +57,38 @@ const Button = styled.div`
   }
 `;
 
-Button.propTypes = {
+Button.propType = {
   color: PropTypes.string
 };
+
+const RemoveButton = styled.div`
+  /* 레이아웃 */
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+
+  /* 색상 */
+  color: ${oc.gray[6]};
+
+  /* 기타 */
+  cursor: pointer;
+  font-size: 2rem;
+
+  /* 마우스 커서 위에 있을 때 */
+  &:hover {
+    color: ${oc.red[6]};
+  }
+  /* 마우스 커서 클릭 시 */
+  &:active {
+    color: ${oc.red[7]}
+  }
+
+  ${props => !props.visible && 'display: none;'}
+`;
+
+RemoveButton.propTypes = {
+  visible: PropTypes.bool
+}
 
 class ContactModal extends Component {
 
@@ -90,23 +121,31 @@ class ContactModal extends Component {
       phone,
       color,
       onHide,
-      onAction
+      onAction,
+      onRemove
     } = this.props;
 
     return (
       <Modal visible={visible} onHide={onHide}>
         <ThumbnailWrapper>
+          <RemoveButton
+            visible={mode==='modify'}
+            onClick={onRemove}>
+            <RemoveIcon/>
+          </RemoveButton>
           <Thumbnail size="8rem" color={color}/>
         </ThumbnailWrapper>
         <Form>
           <Input 
             name="name"
             placeholder="이름"
+            value={name}
             onChange={handleChange}
           />
           <Input 
             name="phone"
             placeholder="전화번호"
+            value={phone}
             onChange={handleChange}
           />
         </Form>
