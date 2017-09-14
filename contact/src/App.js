@@ -12,6 +12,8 @@ import FavoriteList from './components/FavoriteList';
 
 import oc from 'open-color';
 
+import Perf from 'react-addons-perf';
+
 function generateRandomColor() {
   const colors = [
     'gray',
@@ -94,7 +96,15 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    if (prevProps.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+
+    if (Perf.isRunning()) {
+      Perf.stop();
+      Perf.printInclusive();
+      Perf.printWasted();
+    }
   }
   
 
@@ -191,6 +201,7 @@ class App extends Component {
     if (view !== 'list')
       this.setState({view: 'list'});
     
+    Perf.start();
     this.modalHandler.show(
       'create',
       {

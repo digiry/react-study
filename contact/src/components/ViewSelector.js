@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 
@@ -68,23 +68,28 @@ Item.propTypes = {
   onSelect: PropTypes.func
 }
 
-const ViewSelector = ({selected, onSelect}) => (
-  <Wrapper>
-    <Item
-      selected={selected}
-      name="favorite"
-      onSelect={onSelect}>
-      <StarIcon/>
-    </Item>
-    <Item
-      selected={selected}
-      name="list"
-      onSelect={onSelect}>
-      <PeopleIcon/>
-    </Item>
-    <Bar right={selected==='list'} />
-  </Wrapper>
-);
+class ViewSelector extends PureComponent {
+  render() {
+    const { selected, onSelect } = this.props;
+    return (
+      <Wrapper>
+        <Item
+          selected={selected}
+          name="favorite"
+          onSelect={onSelect}>
+          <StarIcon/>
+        </Item>
+        <Item
+          selected={selected}
+          name="list"
+          onSelect={onSelect}>
+          <PeopleIcon/>
+        </Item>
+        <Bar right={selected==='list'} />
+      </Wrapper>
+    );
+  }
+}
 
 ViewSelector.propTYpes = {
   selected: PropTypes.string,

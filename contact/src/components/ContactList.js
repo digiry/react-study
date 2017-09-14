@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import ContactItem from './ContactItem';
@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   }
 `;
 
-class ContactList extends Component {
+class ContactList extends PureComponent {
   static propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.object),
     search: PropTypes.string,

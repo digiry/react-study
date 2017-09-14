@@ -133,6 +133,10 @@ class ContactItem extends Component {
     onOpenModify: PropTypes.func
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return this.props.contact !== nextProps.contact;
+  }
+  
   render() {
     const {
       contact: { name, phone, favorite, id, color },
