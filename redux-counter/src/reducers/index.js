@@ -1,11 +1,55 @@
-import number from './number';
-import color from './color';
+import * as types from '../actions/ActionTypes';
+import { Map, List } from 'immutable';
 
-import { combineReducers } from 'redux';
+const initialState = Map({
+  counters: List([
+    Map({
+      color: 'black',
+      number: 0
+    })
+  ])
+})
 
-const reducers = combineReducers({
-  numberData: number,
-  colorData: color
-});
+function counter(state = initialState, action) {
+  const counters = state.get('counters');
 
-export default reducers;
+  switch (action.type) {
+    case types.CREATE:
+      return state.set(
+        'counters',
+        counters.push(Map({
+          color: action.color,
+          number: 0
+        }))
+      );
+    case types.REMOVE:
+      return state.set('counters', counters.pop());
+    case types.INCREMENT:
+      return state.set('counters', counters.update(
+        action.index,
+        (counter) => counter.set(
+          'number',
+          counter.get('number') + 1
+        )
+      ));
+    case types.DECREMENT:
+      return state.set('counters', counters.update(
+        action.index,
+        (counter) => counter.set(
+          'number',
+          counter.get('number') - 1
+        )
+      ));
+    case types.SET_COLOR:
+      return state.set('counters', counters.update(
+        action.index,
+        (counter) => counter.set(
+          'color', action.color
+        )
+      ));
+    default:
+      return state;
+  }
+};
+
+export default counter;
