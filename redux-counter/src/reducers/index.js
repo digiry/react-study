@@ -25,28 +25,11 @@ function counter(state = initialState, action) {
     case types.REMOVE:
       return state.set('counters', counters.pop());
     case types.INCREMENT:
-      return state.set('counters', counters.update(
-        action.index,
-        (counter) => counter.set(
-          'number',
-          counter.get('number') + 1
-        )
-      ));
+      return state.updateIn(['counters', action.index, 'number'], number => number + 1);
     case types.DECREMENT:
-      return state.set('counters', counters.update(
-        action.index,
-        (counter) => counter.set(
-          'number',
-          counter.get('number') - 1
-        )
-      ));
+      return state.updateIn(['counters', action.index, 'number'], number => number - 1);
     case types.SET_COLOR:
-      return state.set('counters', counters.update(
-        action.index,
-        (counter) => counter.set(
-          'color', action.color
-        )
-      ));
+      return state.setIn(['counters', action.index, 'color'], action.color);
     default:
       return state;
   }
