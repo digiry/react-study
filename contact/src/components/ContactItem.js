@@ -6,6 +6,9 @@ import Thumbnail from './Thumbnail';
 import StarIcon from 'react-icons/lib/md/star';
 import EditIcon from 'react-icons/lib/md/edit';
 
+import ImmutablePropTypes from 'react-immutable-proptypes';
+
+
 const Wrapper = styled.div`
   padding: 1rem;
   position: relative;
@@ -116,13 +119,13 @@ const CircleButton = styled.div`
   `}
 `;
 
-CircleButton.propTYpes = {
+CircleButton.propTypes = {
   active: PropTypes.bool
 };
 
 class ContactItem extends Component {
   static propTypes = {
-    contact: PropTypes.shape({
+    contact: ImmutablePropTypes.mapContains({
       id: PropTypes.string,
       name: PropTypes.string,
       phone: PropTypes.string,
@@ -139,10 +142,13 @@ class ContactItem extends Component {
   
   render() {
     const {
-      contact: { name, phone, favorite, id, color },
+      contact,
       onOpenModify,
       onToggleFavorite
     } = this.props;
+
+    const { name, phone, favorite, id, color } = contact.toJS();
+    
     return (
         <Wrapper>
           <Thumbnail color={color}/>
@@ -151,7 +157,7 @@ class ContactItem extends Component {
             <Phone>{phone}</Phone>
           </Info>
           <div className="actions">
-            <CircleButton 
+            <CircleButton  
               favorite
               active={favorite}
               onClick={() => onToggleFavorite(id)}

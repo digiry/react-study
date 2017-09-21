@@ -32,7 +32,7 @@ export default handleActions({
   [HIDE]: (state, action) => state.set('visible', false),
 
   [CHANGE]: (state, action) => {
-    const { name, value } = state.payload;
+    const { name, value } = action.payload;
 
     return state.setIn(['contact', name], value);
   }

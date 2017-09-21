@@ -4,6 +4,11 @@ import Container from './components/Container';
 import { connect } from 'react-redux';
 
 import ViewSelectorContainer from './containers/ViewSelectorContainer';
+import InputContainer from './containers/InputContainer';
+import FavoriteListContainer from './containers/FavoriteListContainer';
+import FloatingButtonContainer from './containers/FloatingButtonContainer';
+import ContactModalContainer from './containers/ContactModalContainer';
+import ContactListContainer from './containers/ContactListContainer';
 
 
 class App extends Component {
@@ -18,15 +23,15 @@ class App extends Component {
 
         {/* view 값에 따라 다른 컨테이너를 보여준다 */}
         <Container visible={view==='favorite'}>
-          {/* FavoriteListContainer */}
+          <FavoriteListContainer />
         </Container>
         <Container visible={view==='list'}>
-          {/* InputContainer */}
-          {/* ContactListContainer */}
+          <InputContainer />
+          <ContactListContainer />
         </Container>
         
-        {/* ContactModalContainer */}
-        {/* FloatingButtonContainer */}
+        <ContactModalContainer />
+        <FloatingButtonContainer />
       </div>
     );
   }

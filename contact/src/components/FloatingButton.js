@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   transition: all .15s;
 
   &:hover {
-    transform: translatey(-0.5rem);
+    transform: translateY(-0.5rem);
     color: white;
     background: ${oc.pink[6]};
   }

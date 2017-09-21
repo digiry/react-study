@@ -35,7 +35,7 @@ const StyledItem = styled.div`
   }
 `;
 
-StyledItem.propTYpes = {
+StyledItem.propTypes = {
   active: PropTypes.bool
 } 
 
@@ -91,7 +91,7 @@ class ViewSelector extends PureComponent {
   }
 }
 
-ViewSelector.propTYpes = {
+ViewSelector.propTypes = {
   selected: PropTypes.string,
   onSelect: PropTypes.func
 } 

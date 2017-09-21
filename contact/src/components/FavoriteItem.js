@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import oc from 'open-color';
 import PropTypes from 'prop-types';
 import PersonIcon from 'react-icons/lib/md/person';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+
 
 const Wrapper = styled.div`
   width: 50%;
@@ -13,7 +14,7 @@ const Box = styled.div`
   background: ${props => props.color};
 `;
 
-const ThumbnailContaier = styled.div`
+const ThumbnailContainer = styled.div`
   height: 6rem;
   display: flex;
   align-items: center;
@@ -43,22 +44,26 @@ const Phone = styled.div`
   margin-top: 0.25rem;
 `;
 
-const FavoriteItem = ({contact: {color, name, phone}}) => (
+const FavoriteItem = ({contact}) => { 
+  const { color, name, phone } = contact.toJS();
+
+  return (
     <Wrapper>
       <Box color={color}>
-        <ThumbnailContaier>
+        <ThumbnailContainer>
           <PersonIcon/>
-        </ThumbnailContaier>
+        </ThumbnailContainer>
         <Info>
           <Name>{name}</Name>
           <Phone>{phone}</Phone>
         </Info>
       </Box>
     </Wrapper>
-);
+  );
+};
 
 FavoriteItem.propTypes = {
-  contact: PropTypes.shape({
+  contact: ImmutablePropTypes.mapContains({
     id: PropTypes.string,
     name: PropTypes.string,
     phone: PropTypes.string,
