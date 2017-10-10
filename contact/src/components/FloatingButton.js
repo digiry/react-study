@@ -5,45 +5,54 @@ import PropTypes from 'prop-types';
 import AddIcon from 'react-icons/lib/md/add';
 
 const Wrapper = styled.div`
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 4rem;
-  height: 4rem;
+    /* 레이아웃 */
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 4rem;
+    height: 4rem;
 
-  background: white;
-  border: 3px solid ${oc.pink[6]};
-  color: ${oc.pink[6]};
+    /* 색상 */
+    background: white;
+    border: 3px solid ${oc.pink[6]};
+    color: ${oc.pink[6]};
 
-  border-radius: 2rem;
-  font-size: 2rem;
-  cursor: pointer;
+    /* 기타 */
+    border-radius: 2rem;
+    font-size: 2rem;
+    cursor: pointer;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    /* 중앙정렬 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  transition: all .15s;
+    /* 애니메이션 */
+    transition: all .15s;
 
-  &:hover {
-    transform: translatey(-0.5rem);
-    color: white;
-    background: ${oc.pink[6]};
-  }
+    /* 마우스가 위에 있을 때 */
+    &:hover {
+        /* 위로 조금 움직이고 색바꿈 */
+        transform: translateY(-0.5rem); 
+        color: white;
+        background: ${oc.pink[6]}; 
+    }
 
-  &:active {
-    background: ${oc.pink[7]};
-  }
+    /* 클릭될때 */
+    &:active {
+        /* 색 좀 더 어둡게 */
+        background: ${oc.pink[7]};
+    }
 `;
 
 const FloatingButton = ({onClick}) => (
-  <Wrapper onClick={onClick}>
-    <AddIcon />
-  </Wrapper>
+    <Wrapper onClick={onClick}>
+        <AddIcon/>
+    </Wrapper>
 );
 
 FloatingButton.propTypes = {
-  onClick: PropTypes.func
+    onClick: PropTypes.func
 }
 
 export default FloatingButton;
