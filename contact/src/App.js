@@ -18,17 +18,9 @@ class App extends Component {
 
     componentDidMount() {
         const { ContactsActions } = this.props;
+        const contacts = localStorage.getItem('contacts');
 
-        ContactsActions.loadContacts();
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        const { contacts } = this.props;
-
-        // 로컬 스토리지에 저장
-        if(prevState.contacts !== contacts.toJS()) {
-            localStorage.setItem('contacts', JSON.stringify(contacts.toJS()));
-        }
+        ContactsActions.loadContacts(JSON.parse(contacts));
     }
 
     render() {
@@ -59,7 +51,6 @@ class App extends Component {
 export default connect(
     (state) => ({
         view: state.base.get('view'),
-        contacts: state.contacts
     }),
 
     (dispatch) => ({

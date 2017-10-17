@@ -24,6 +24,12 @@ class ContactListContainer extends Component {
     ContactsActions.toggleFavorite(id);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.contacts !== this.props.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.props.contacts.toJS()));
+    }
+  }
+  
   render() {
     const { contacts, keyword } = this.props;
     const {

@@ -75,13 +75,8 @@ export default handleActions({
   },
 
   [LOAD_CONTACTS]: (state, action) => {
-    const contacts = localStorage.getItem('contacts');
+    const contacts = action.payload;
 
-    // 로컬 스토리지에서 불러오기
-    if(contacts) {
-      state = fromJS(contacts);
-    }
-
-    return state;
+    return fromJS(contacts);
   }
 }, initialState);
