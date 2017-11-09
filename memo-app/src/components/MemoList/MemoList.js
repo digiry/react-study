@@ -35,7 +35,7 @@ const MemoList = ({memos, onOpen}) => {
   );
 };
 
-MemoList.prototype = {
+MemoList.propTypes = {
   memos: ImmutablePropTypes.listOf(
     ImmutablePropTypes.mapContains({
       id: PropTypes.number,

@@ -11,6 +11,8 @@ import { bindActionCreators } from "redux";
 
 class App extends Component {
   async componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+
     const { MemoActions } = this.props;
 
     try {
@@ -21,6 +23,17 @@ class App extends Component {
     }
   }
  
+  handleScroll = (e) => {
+    const { clientHeight } = document.body;
+    const { scrollTop } = document.documentElement;
+    const { innerHeight } = window;
+
+    console.log(clientHeight, innerHeight, scrollTop);
+    if (clientHeight - innerHeight - scrollTop < 100) {
+      console.log('페이지 끝에 가까워 졌군요');
+    }
+  }
+
   getRecentMemo = () => {
     const { MemoActions, cursor } = this.props;
     MemoActions.getRecentMemo(cursor ? cursor : 0);
@@ -36,8 +49,8 @@ class App extends Component {
         <Layout.Main>
           <WriteMemo />
           <MemoListContainer />
+          <MemoViewerContainer/>
         </Layout.Main>
-        <MemoViewerContainer/>
       </Layout>
     );
   }

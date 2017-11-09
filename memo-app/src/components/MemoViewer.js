@@ -47,7 +47,7 @@ const TrashButton = styled.div`
   }
 
   &:active {
-    color: &{oc.gray[8]};
+    color: ${oc.gray[8]};
   }
 
   font-size: 1.5rem;
@@ -72,7 +72,7 @@ const MemoViewer = ({
   );
 };
 
-MemoViewer.prototype = {
+MemoViewer.propTypes = {
   visible: PropTypes.bool,
   title: PropTypes.string,
   body: PropTypes.string,
