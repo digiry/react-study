@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 const Wrapper = styled.div`
     text-align: center;
     margin-top: 32px;
-    margin-bottom: 32px;0
+    margin-bottom: 32px;
 `;
 
 const Spinner = ({visible}) => visible ? (
