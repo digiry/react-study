@@ -31,6 +31,8 @@ module.exports = {
     strictExportPresence: true,
     rules: [
         // 자바스크립트 이외의 파일들을 무시합니다.
+        // exclude 에 포함된 파일을 제외한 나머지 파일들이 loader 에 실행되게 된다.
+        // 결국, ignore loader 에게 파일들이 무시됨. 
         {
             exclude: [
                 /\.(js|jsx)$/,
