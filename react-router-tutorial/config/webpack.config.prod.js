@@ -57,13 +57,13 @@ module.exports = {
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
   entry: {
+    app: paths.appIndexJs,
     vendor: [
       require.resolve('./polyfills'),
       'react',
       'react-dom',
       'react-router-dom'
-    ],
-    app: paths.appIndexJs 
+    ]
   },
   output: {
     // The build folder.
@@ -104,13 +104,6 @@ module.exports = {
       'react-native': 'react-native-web',
     },
     plugins: [
-      new webpack.NormalModuleReplacementPlugin(
-        /^pages$/,
-        'pages/index.async.js'
-      ),
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
       // Prevents users from importing files from outside of src/ (or node_modules/).
       // This often causes confusion because we only process files within src/ with babel.
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
@@ -249,6 +242,13 @@ module.exports = {
     ],
   },
   plugins: [
+      new webpack.NormalModuleReplacementPlugin(
+        /^pages$/,
+        'pages/index.async.js'
+      ),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
