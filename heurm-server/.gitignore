@@ -57,3 +57,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# Data strore 
+src/.DS_Store

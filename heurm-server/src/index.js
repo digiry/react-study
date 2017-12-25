@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useMongoClient: true
 }).then(
   (response) => {
-    console.log('Successfully connectd to mongodb');
+    console.log('Successfully connected to mongodb');
   }
 ).catch(e => {
   console.error(e);
